@@ -1,14 +1,34 @@
 from tkinter import *
 import random
-import pywhatkit as p
+import socket
+
 root=Tk()
 First_Frame=LabelFrame(root,padx=400,pady=300)
 def afterent():
     global First_Frame
-    otp=random.randint(100000,999999)
     num="+91"+number.get()
-    p.sendwhatmsg_instantly(num,str(otp),tab_close=True,close_time=3)
+    otp=random.randint(100000,999999)
+
+    host = '192.168.0.101'
+    port = 3006
+
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect((host, port))
+
+    data_to_send = num
+    client_socket.send(data_to_send.encode())
+
+    port = 3007
+
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect((host, port))
+
+    data_to_send = str(otp)
+    client_socket.send(data_to_send.encode())
+
+    client_socket.close()
     def afterent_2():
+
         if str(otp)==otp1.get():
             First_Frame.grid_forget()
 
