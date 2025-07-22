@@ -6,7 +6,7 @@ mydb = mysql.connector.connect(
   host="localhost",
   user="root",
   port=3006,
-  password="NRM@@@#@!%",
+  password="",
   database='mini'
 )
 mycursor = mydb.cursor()
